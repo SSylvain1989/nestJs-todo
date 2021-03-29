@@ -45,12 +45,11 @@ export class TodosService {
   }
 
   update(id: string, todo: CreateTodoDto) {
-    // récupérer le todo à mettre à jour  - ici le "+" permet de caster la string en number //
-
-    let indexTodoUpdate: number;
+    // récupérer le todo à mettre à jour avec l'id  - ici le "+" permet de caster la string en number //
     for (const indexTodoUpdate in this.todos) {
+      // litéralement , si pour l'itération en cours dans le tableau de todos , le todos.id est égale à l'id en parametre de update alors ... //
       if (this.todos[indexTodoUpdate].id === +id) {
-        //rècupère les propriétés du todo envoyé
+        //tu stocks dans todoToUpdateKeys toutes les clés de chaque objet todo itéré et rècupère les propriétés/clés du todo envoyé //
         const todoToUpdateKeys = Object.keys(todo);
         // remplace chaque propriété par sa mise à jour
         for (const todoToUpdateKey of todoToUpdateKeys) {
