@@ -94,4 +94,23 @@ export class TodosService {
     // this.todos = [...updateTodos];
     // return { updateTodo: 1, todo: todoToUpdate};
   }
+  // delete(id: string, todo: CreateTodoDto) {
+  //   for (const indexTodoUpdate in this.todos) {
+  //     console.log('indexTodoUpdate', indexTodoUpdate);
+  //     if (this.todos[indexTodoUpdate].id === +id) {
+  //       this.todos = this.todos.splice(+indexTodoUpdate);
+  //     }
+  //   }
+  // }
+
+  delete(id: string) {
+    const nbOfTodosBeforeDelete = this.todos.length;
+    // filter va créer un nouveau tableau avec tous les id sauf celui qui correspond à l'id de la requete//
+    this.todos = this.todos.filter((todo) => todo.id !== +id);
+    if (this.todos.length < nbOfTodosBeforeDelete) {
+      return { deletedTodos: 1, nbTodos: this.todos.length };
+    } else {
+      return { deletedTodos: 0, nbTodos: this.todos.length };
+    }
+  }
 }
