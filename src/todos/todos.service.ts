@@ -45,20 +45,37 @@ export class TodosService {
   }
 
   update(id: string, todo: CreateTodoDto) {
-    // récupérer le todo à mettre à jour avec l'id  - ici le "+" permet de caster la string en number //
+    // on cherche l'index sur lequel on va faire la modification , donc on va boucler jusqu'à tomber sur l'index concerné //
     for (const indexTodoUpdate in this.todos) {
-      // litéralement , si pour l'itération en cours dans le tableau de todos , le todos.id est égale à l'id en parametre de update alors ... //
+      console.log('indexTodoUpdate', indexTodoUpdate);
+
+      // litéralement , si pour l'itération en cours dans le tableau de todos , le todos.id est égale à l'id en parametre de update alors on arrête la boucle et ... //
       if (this.todos[indexTodoUpdate].id === +id) {
         //tu stocks dans todoToUpdateKeys toutes les clés de chaque objet todo itéré et rècupère les propriétés/clés du todo envoyé //
         const todoToUpdateKeys = Object.keys(todo);
+        console.log('todoToUpdateKeys', todoToUpdateKeys);
         // remplace chaque propriété par sa mise à jour
         for (const todoToUpdateKey of todoToUpdateKeys) {
+          console.log('todoToUpdateKey', todoToUpdateKey);
+          // output : quel est la propriété concerné par la mise à jour
+
           this.todos[indexTodoUpdate][todoToUpdateKey] = todo[todoToUpdateKey];
+          console.log(
+            'this.todos[indexTodoUpdate]',
+            this.todos[indexTodoUpdate],
+            // output : l'objet concerné par l'update //
+          );
+          console.log(
+            'this.todos[indexTodoUpdate][todoToUpdateKey]',
+            this.todos[indexTodoUpdate][todoToUpdateKey],
+            // output : la valeur de l'update //
+          );
         }
         return { updateToDo: 1, todo: this.todos[indexTodoUpdate] };
       }
     }
 
+    // récupérer le todo à mettre à jour avec l'id  - ici le "+" permet de caster la string en number //
     // const todoToUpdate = this.todos.find((todo) => todo.id === +id);
     // if (!todoToUpdate) return new NotFoundException("cette todo n'existe pas");
     // // appliquer l'update
